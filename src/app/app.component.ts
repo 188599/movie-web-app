@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, tap } from 'rxjs';
+import { MoviesService } from './services/movies.service';
 
 @Component({
   selector: 'app-root',
@@ -29,5 +32,34 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   title = 'Movies';
+
+
+  constructor(router: Router, moviesService: MoviesService) {
+    router.events
+      .pipe(
+        filter(ev => ev instanceof NavigationEnd),
+        map(ev => ev as NavigationEnd),
+        tap(({ urlAfterRedirects }) => {
+          const id = urlAfterRedirects.match(/\d+$/)?.[0];
+
+          if (id) {
+            const movie = moviesService.getMovie(+id);
+
+            if (movie) {
+              this.title = movie.title;
+            }
+
+            else {
+              this.title = 'Movie not found';
+            }
+
+            return;
+          }
+
+          this.title = 'Movies';
+        })
+      )
+      .subscribe();
+  }
 
 }

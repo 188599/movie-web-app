@@ -14,13 +14,15 @@ import * as dayjs from 'dayjs';
 import * as localizedFormat from 'dayjs/plugin/localizedFormat';
 
 import { MoviesComponent } from './components/movies.component';
+import { MovieDetailsComponent } from './components/movie-details.component';
 
 dayjs.extend(localizedFormat);
 
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesComponent
+    MoviesComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,
