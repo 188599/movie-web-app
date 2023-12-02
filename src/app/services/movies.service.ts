@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Movie } from "../interfaces/movie.interface";
 import * as dayjs from "dayjs";
 import { DomSanitizer } from "@angular/platform-browser";
-import * as moviesJson from '../movies.json';
+import * as moviesJson from '../../assets/movies.json';
 
 @Injectable({ providedIn: 'root' })
 export class MoviesService {
@@ -47,6 +47,7 @@ export class MoviesService {
 
     private setMovies() {
         const movies = Array.from(moviesJson);
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const moviesService = this;
 
         this.movies = movies.map(movie => ({
