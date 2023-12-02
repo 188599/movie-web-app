@@ -4,6 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import * as dayjs from 'dayjs';
+import * as localizedFormat from 'dayjs/plugin/localizedFormat';
+
+dayjs.extend(localizedFormat);
+
 @NgModule({
   declarations: [
     AppComponent
