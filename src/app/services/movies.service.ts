@@ -9,8 +9,17 @@ export class MoviesService {
 
     private movies!: Movie[];
 
+    private _watchList: Set<number> = new Set();
+
+    private WATCHLIST_STORAGE_KEY = 'WATCHLIST_STORAGE_KEY';
+
+    public get watchList() {
+        return [...Array.from(this._watchList)] as const;
+    }
+
 
     constructor(private sanitizer: DomSanitizer) {
+        this.retrieveWatchListFromLocalStorage();
         this.setMovies();
     }
 
@@ -21,6 +30,18 @@ export class MoviesService {
 
     public getMovie(id: number) {
         return this.movies.find(movie => movie.id == id);
+    }
+
+    public addToWatchList(id: number) {
+        this._watchList.add(id);
+
+        this.saveWatchListToLocalStorage();
+    }
+
+    public removeFromWatchList(id: number) {
+        this._watchList.delete(id);
+
+        this.saveWatchListToLocalStorage();
     }
 
 
@@ -35,6 +56,18 @@ export class MoviesService {
             duration: `${Math.floor(movie.duration / 60)}h ${movie.duration % 60}min`,
             get watchlist() { return moviesService.watchList.includes(this.id) }
         }));
+    }
+
+    private retrieveWatchListFromLocalStorage() {
+        const watchList = localStorage.getItem(this.WATCHLIST_STORAGE_KEY);
+
+        if (watchList) {
+            this._watchList = new Set(JSON.parse(watchList));
+        }
+    }
+
+    private saveWatchListToLocalStorage() {
+        localStorage.setItem(this.WATCHLIST_STORAGE_KEY, JSON.stringify(this.watchList));
     }
 
 }

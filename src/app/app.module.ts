@@ -9,12 +9,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatChipsModule } from '@angular/material/chips';
 
 import * as dayjs from 'dayjs';
 import * as localizedFormat from 'dayjs/plugin/localizedFormat';
 
 import { MoviesComponent } from './components/movies.component';
 import { MovieDetailsComponent } from './components/movie-details.component';
+import { WatchListButtonComponent } from './components/watchlist-button.component';
 
 dayjs.extend(localizedFormat);
 
@@ -22,7 +24,8 @@ dayjs.extend(localizedFormat);
   declarations: [
     AppComponent,
     MoviesComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    WatchListButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ dayjs.extend(localizedFormat);
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

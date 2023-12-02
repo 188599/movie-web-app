@@ -25,6 +25,9 @@ import { MoviesService } from "../services/movies.service";
 
                 <p> {{ movie?.joinedGenres }} </p>
 
+                <p>
+                    <app-watchlist-button [id]="movie!.id"></app-watchlist-button>
+                </p>
             </div>
     
             <div class="container-right">

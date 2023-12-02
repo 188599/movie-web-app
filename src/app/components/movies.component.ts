@@ -28,6 +28,7 @@ import { Subject, takeUntil, tap } from "rxjs";
                                     <p class="movie-rating"> 
                                         Rating: {{ movie.rating }}
 
+                                        <app-watchlist-button [id]="movie.id"></app-watchlist-button>
                                     </p>
                                 </td>
                             </tr>
@@ -61,6 +62,9 @@ import { Subject, takeUntil, tap } from "rxjs";
             border-collapse: collapse;
         }
         
+        app-watchlist-button {
+            float: right;
+        }
     `]
 })
 export class MoviesComponent implements OnInit, OnDestroy {
